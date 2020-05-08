@@ -15,13 +15,30 @@ De todo modo, a aplcação irá interessar aqueles que _i)_ não programam em py
 
 Para entender o funcionamento do **transk table** é útil entender antes o _workflow_ em que se baseia o programa. O _workflow_ de transcrição é definido pelos seguintes passos:
 
-1) **Ler a tabela usando tabular**: o _output_ desse primeiro passo é a tabela "crua". É uma leitura que, normalmente, acerta o valor da maioria das células, mas têm duas falhas. Em primeiro lugar, o tabula erra sistematicamente o número de linhas e colunas da tabela em questão. Além disso, muitas células são preenchidas de forma errada, com trocas de 1 por ! ou mesmo sem nenhum preenchimento onde havia informação.
+1) **Ler a tabela usando tabular**: o _output_ desse primeiro passo é a tabela "bruta". É uma leitura que, normalmente, acerta o valor da maioria das células, mas têm duas falhas. Em primeiro lugar, o tabula erra sistematicamente o número de linhas e colunas da tabela em questão. Além disso, muitas células são preenchidas de forma errada, com trocas de 1 por ! ou mesmo sem nenhum preenchimento onde havia informação.
 2) **Arrumar número de linhas e colunas**: o segundo passo corrige a primeira limitação da leitura do tabula relatada acima. Assim, esse passo consiste em arrumar manualmente o número de linhas e colunas usando um program simples de planilhas como excel ou o calc (libreoffice).
 3) **Checar valores**: o terceiro passo consiste em checarm célula por célula se os valores na tabela estão corretos e preencher/substituir quando não tiverem
 
 #### GUI
 
+Para usar a GUI, o usuário deve ter no seu computador um documento em pdf onde estão as tabelas que ele pretende transcrever.
+
 Na atual versão, o **transk table** tem apenas uma janela dividida em dois _frames_, como pode ser visto na figura abaixo:
+
+![alt text](https://github.com/lucascr91/transk_table/blob/master/gui_tt.png)
+
+O **transk table** transcreve uma tabela por vez, então para iniciar a transcrição o usuário deve definir o número da página onde está a tabela de interesse e clicar em *open* **depois** para abrir o documento. Após a seleção do documento o **transk table** vai criar uma pasta cujo nome será dado pelo número da página. Dentro dessa pasta será salvo um arquivo em csv chamado "DDD_page.csv", onde DDD é o número da página. O arquivo "DDD_page.csv" é a transcrição bruta feita pelo tabular. Dessa forma, a simples definição da página e abertura dodumento encerra o passo 1.
+
+Para a consecução do passo 2 o usuário precisa clicar em *Open Excel Sheet* (usuários de Windows) ou *Open Calc sheet* (usuários de Linux). O **transk table** abrirá então o "DDD_page.csv". Aberto esse arquivo, o usuário deve corrigir o número de linhas e colunas, salvar o arquivo e fechar. Após esse fechar o arquivo, o usuário deve clicar em *Clean*. Esse botão elimina todas as entradas diferents de números, desconsiderando as informações da primeira coluna. 
+
+Por fim, a última eta consistem em digitar no terminal dentro da GUI o seguinte comando:
+
+```
+python corrections.py DDD
+```
+Em que DDD é o número da página para a qual você quer fazer a conferência.
+
+Será então iniciado um "jogo" em que o computador irá lhe apresentar os valores de cada célula e você terá que responder se aquele valor é válido ou não. Se for válido apenas clique em enter. Se precisar substituir responda de acordo. O jogo é auto-explicativo e irá salvar automaticamente todas as alterações que você implementar durante as respostas em um arquivo chamado "DDD_page_final.csv" na respectiva pasta. A correção é feita por coluna. Quando terminar todas as colunas, simplesmente clique em *Quit*. A transcrição da tabela estará pronta.
 
 
 
