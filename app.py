@@ -115,14 +115,25 @@ first_step_entry=ttk.Entry(frame_one,width=15, textvariable=user_page)
 first_step_entry.grid(row=0, column=1)
 first_step_entry.focus()
 
-buttton_feats={'open':['Open', lambda:open_file(), 2], 'excel':['Open Excel Sheet', lambda:open_excel(), 3],
-'calc':['Open Calc Sheet', lambda:open_calc(), 4], 'clean':['Clean', lambda:combine_funcs(open_modfile, transform_cols), 5],
-'quit':['Quit', root.destroy, 6]}
+#READ
+read_btn = ttk.Button(frame_one, text ='Open', command = lambda:open_file()) 
+read_btn.grid(row=0,column=2)
 
-for key in buttton_feats.keys():
-    open_btn = tk.Button(frame_one, text =buttton_feats[key][0], command = buttton_feats[key][1])
-    open_btn.grid(row=buttton_feats[key][2],column=0, sticky='EW')
-    open_btn.config(height=2, width=15)
+#OPEN EXCEL
+excel_btn = ttk.Button(frame_one, text ='Open Excel Sheet', command = lambda:open_excel()) 
+excel_btn.grid(row=1, column=0,)
+
+#OPEN CALC
+calc_btn = ttk.Button(frame_one, text ='Open Calc Sheet', command = lambda:open_calc()) 
+calc_btn.grid(row=1, column=1)
+
+#CLEAN
+clean_btn = ttk.Button(frame_one, text ='Clean', command = combine_funcs(open_modfile, transform_cols)) 
+clean_btn.grid(row=2, column=0, columnspan=2, sticky='EW')
+
+#QUIT
+clean_btn = ttk.Button(frame_one, text ='Quit', command = root.destroy) 
+clean_btn.grid(row=3, column=0, columnspan=2, sticky='EW')
 
 #==================================================================
 #==================================================================
