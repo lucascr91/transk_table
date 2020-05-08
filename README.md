@@ -62,7 +62,7 @@ Esse é o único pacote que não vem instalado no Anaconda. Caso você tenha ins
 Com a instalação completa, você poderá iniciar o *transk table* seguindo apenas dois passos:
 
 1) Faça o download desse repositório, extraia a pasta para um local de preferência em seu computador
-2) Entre na pasta pelo terminal (por exemplo, se a pasta do programa foi extraída na sua pasta de Downloads, digite no terminal `cd Downloads`) e rode:
+2) Entre na pasta pelo terminal (por exemplo, se a pasta do programa foi extraída na sua pasta de Downloads, digite no terminal `cd Downloads/transk_table` e tecle Enter) e rode:
 
 ```
 python app.py
