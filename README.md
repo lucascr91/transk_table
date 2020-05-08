@@ -23,7 +23,7 @@ Para entender o funcionamento do **transk table** é útil entender antes o _wor
 
 #### GUI
 
-### ATENÇÃO: O pdf deve estar com OCR para funcionar
+##### ATENÇÃO: O pdf deve estar com OCR para funcionar
 
 Para usar a GUI, o usuário deve ter no seu computador um documento em pdf onde estão as tabelas que ele pretende transcrever.
 
