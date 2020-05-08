@@ -19,7 +19,7 @@ Para entender o funcionamento do **transk table** é útil entender antes o _wor
 
 1) **Ler a tabela usando tabular**: o _output_ desse primeiro passo é a tabela "bruta". É uma leitura que, normalmente, acerta o valor da maioria das células, mas têm duas falhas. Em primeiro lugar, o tabula erra sistematicamente o número de linhas e colunas da tabela em questão. Além disso, muitas células são preenchidas de forma errada, com trocas de 1 por ! ou mesmo sem nenhum preenchimento onde havia informação.
 2) **Arrumar número de linhas e colunas**: o segundo passo corrige a primeira limitação da leitura do tabula relatada acima. Assim, esse passo consiste em arrumar manualmente o número de linhas e colunas usando um programa simples de planilhas como excel ou o calc (libreoffice).
-3) **Checar valores**: o terceiro passo consiste em checarm célula por célula se os valores na tabela estão corretos e preencher/substituir quando não tiverem
+3) **Checar valores**: o terceiro passo consiste em checar célula por célula se os valores na tabela estão corretos e preencher/substituir quando não tiverem
 
 #### GUI
 
@@ -49,7 +49,7 @@ Será então iniciado um "jogo" em que o computador irá lhe apresentar os valor
 
 Para instalar e rodar o *transk table* no seu computador você irá precisar ter instalado o python 3, alguns pacotes dessa linguagem que serão detalhados mais adiante, além de acesso ao terminal. A forma mais conveniente de se instalar o python com os pacotes necessários para rodar o *transk table* é instalar o [Anaconda](https://www.anaconda.com/products/individual). A instalação é simples e pode ser feita após o download do instalador no site do _software_ .Para os usuários de Windows recomendo baixar alguma das versões anteriores do Anaconda (digamos, 3.5). Versões mais recentes do Anaconda têm apresentado incompatibilidades com o Windows.
 
-Depois de intalado o Anaconda, abra o terminal do seu computador e digite:
+Depois de instalado o Anaconda, abra o terminal do seu computador e digite:
 
 ```
 pip install tabula-py
@@ -57,7 +57,7 @@ pip install tabula-py
 
 Esse é o único pacote que não vem instalado no Anaconda. Caso você tenha instalado o python de outra forma certifique-se de que sua instalação possui os seguintes módulos: pandas, numpy, ttkthemes e tkinter.
 
-#### Iniciando o trank table
+#### Iniciando o transk table
 
 Com a instalação completa, você poderá iniciar o *transk table* seguindo apenas dois passos:
 

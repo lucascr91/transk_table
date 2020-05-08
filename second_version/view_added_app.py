@@ -129,7 +129,7 @@ canvas.columnconfigure(1, weight=1)
 # canvas = Canvas(frame, bd=0, xscrollcommand=xscrollbar.set, yscrollcommand=yscrollbar.set)
 # canvas.grid(row=0, column=0, sticky=N+S+E+W)
 
-img_file = "cd_1950_v25_t1_sp-164-1.jpg"
+img_file = "/home/lucas/projects/transk_table/maranhao.jpg"
 img = ImageTk.PhotoImage(Image.open(img_file))
 canvas.create_image(0,0,image=img, anchor="nw")
 canvas.config(scrollregion=canvas.bbox(ALL))
