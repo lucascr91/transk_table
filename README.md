@@ -1,6 +1,8 @@
 # transk table
 *Um implementação em GUI para auxiliar na transcrição de tabelas antigas*
 
+![alt text](https://github.com/lucascr91/transk_table/blob/master/maranhao.jpg)
+
 
 Esse programa é uma simples implementação em [GUI](https://en.wikipedia.org/wiki/Graphical_user_interface) de um _workflow_ que desenvolvi para transcrever tabelas de censos antigos brasileiros. Do ponto de vista computacional, a GUI não faz mais do que usar a tecnologia do módulo [tabular](https://github.com/chezou/tabula-py) do python. Dessa forma, a facilidade oferecida pela GUI representa um avanço modesto se você já programa em python.
 
