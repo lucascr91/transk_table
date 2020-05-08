@@ -1,2 +1,55 @@
-# transk_table
-Um implementação em GUI para auxiliar na transcrição de tabelas antigas
+# transk table
+*Um implementação em GUI para auxiliar na transcrição de tabelas antigas*
+
+
+Esse programa é uma simples implementação em [GUI](https://en.wikipedia.org/wiki/Graphical_user_interface) de um _workflow_ que desenvolvi para transcrever tabelas de censos antigos brasileiros. Do ponto de vista computacional, a GUI não faz mais do que usar a tecnologia do módulo [tabular](https://github.com/chezou/tabula-py) do python. Dessa forma, a facilidade oferecida pela GUI representa um avanço modesto se você já programa em python.
+
+De todo modo, a aplcação irá interessar aqueles que _i)_ não programam em python (ou em outra linguagem com aplicação do tabular) e/ou _ii)_ procuram por uma ferramene para realizar as transcriçoes de forma semi-automática sem ter que lhe dar com código fonte.
+
+<!-- Essa breve apresentação da ferramenta está dividida em três seções. Na seção seguinte ~mostramos o funcionamento do programa. A ideia dessa seção é, antes de discutir instalação e limitações, mostrar ao usuário o que é o programa e o que ele faz. Mostramos como rodar o programa na seção 3, enquanto uma discussão sobre melhorias potenciais e manutenção do programa são arroladas na seção 4. -->
+
+
+### Como o **transk table** funciona:
+
+#### Workflow
+
+Para entender o funcionamento do **transk table** é útil entender antes o _workflow_ em que se baseia o programa. O _workflow_ de transcrição é definido pelos seguintes passos:
+
+1) **Ler a tabela usando tabular**: o _output_ desse primeiro passo é a tabela "crua". É uma leitura que, normalmente, acerta o valor da maioria das células, mas têm duas falhas. Em primeiro lugar, o tabula erra sistematicamente o número de linhas e colunas da tabela em questão. Além disso, muitas células são preenchidas de forma errada, com trocas de 1 por ! ou mesmo sem nenhum preenchimento onde havia informação.
+2) **Arrumar número de linhas e colunas**: o segundo passo corrige a primeira limitação da leitura do tabula relatada acima. Assim, esse passo consiste em arrumar manualmente o número de linhas e colunas usando um program simples de planilhas como excel ou o calc (libreoffice).
+3) **Checar valores**: o terceiro passo consiste em checarm célula por célula se os valores na tabela estão corretos e preencher/substituir quando não tiverem
+
+#### GUI
+
+Na atual versão, o **transk table** tem apenas uma janela dividida em dois _frames_, como pode ser visto na figura abaixo:
+
+
+
+### Como instalar e rodar o transk table no seu computador:
+
+#### Requisitos
+
+Para instalar e rodar o *transk table* no seu computador você irá precisar ter instalado o python 3, alguns pacotes dessa linguagem que serão detalhados mais adiante, além de acesso ao terminal. A forma mais conveniente de se instalar o python com os pacotes necessários para rodar o *transk table* é instalar o [Anaconda](https://www.anaconda.com/products/individual). A instalação é simples e pode ser feita após o download do instalador no site do _software_ .Para os usuários de Windows recomendo baixar alguma das versões anteriores do Anaconda (digamos, 3.5). Versões mais recentes do Anaconda têm apresentado incompatibilidades com o Windows.
+
+Depois de intalado o Anaconda, abra o terminal do seu computador e digite:
+
+```
+pip install tabula-py
+```
+
+Esse é o único pacote que não vem instalado no Anaconda. Caso você tenha instalado o python de outra forma certifique-se de que sua instalação possui os seguintes módulos: pandas, numpy, ttkthemes e tkinter.
+
+#### Iniciando o trank table
+
+Com a instalação completa, você poderá iniciar o *transk table* seguindo apenas dois passos:
+
+1) Faça o download desse repositório, extraia a pasta para um local de prefrência em seu computador
+2) Entre na pasta pelo terminal e rode:
+
+```
+python app.py
+```
+
+### Melhorias futuras
+
+A versão atual do *transk table* é completamente funcional e você poderá fazer transcrições de tabelas em imagens de baixa resolução de forma organizada e semi-automática. No entanto, a atual versão têm o imenso inconveniente de não ter a imagem da  tabela que está sendo transcrita dentro de GUI. Essas e outras limitações serão corrigidas na segunda versão. Se você tem interesse em contribuir veja a pasta *second_version*. Esta pasta contém o código atual da segunda versão que está sendo desenvolvida, bem como um documento que lista possíveis melhorias a serem incorporadas.
