@@ -6,7 +6,7 @@
 
 Esse programa é uma simples implementação em [GUI](https://en.wikipedia.org/wiki/Graphical_user_interface) de um _workflow_ que desenvolvi para transcrever tabelas de censos antigos brasileiros. Do ponto de vista computacional, a GUI não faz mais do que usar a tecnologia do módulo [tabular](https://github.com/chezou/tabula-py) do python. Dessa forma, a facilidade oferecida pela GUI representa um avanço modesto se você já programa em python.
 
-De todo modo, a aplicação irá interessar aqueles que _i)_ não programam em python (ou em outra linguagem com aplicação do tabular) e/ou _ii)_ procuram por uma ferramenta para realizar as transcrições de forma semi-automática sem ter que lhe dar com código fonte.
+De todo modo, a aplicação irá interessar aqueles que _i)_ não programam em python (ou em outra linguagem com aplicação do tabular) e/ou _ii)_ procuram por uma ferramenta para realizar as transcrições de forma semi-automática sem ter que lidar com código fonte.
 
 <!-- Essa breve apresentação da ferramenta está dividida em três seções. Na seção seguinte ~mostramos o funcionamento do programa. A ideia dessa seção é, antes de discutir instalação e limitações, mostrar ao usuário o que é o programa e o que ele faz. Mostramos como rodar o programa na seção 3, enquanto uma discussão sobre melhorias potenciais e manutenção do programa são arroladas na seção 4. -->
 
