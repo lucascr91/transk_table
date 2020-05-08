@@ -41,7 +41,6 @@ Em que DDD é o número da página para a qual você quer fazer a conferência.
 Será então iniciado um "jogo" em que o computador irá lhe apresentar os valores de cada célula e você terá que responder se aquele valor é válido ou não. Se for válido apenas clique em enter. Se precisar substituir responda de acordo. O jogo é auto-explicativo e irá salvar automaticamente todas as alterações que você implementar durante as respostas em um arquivo chamado "DDD_page_final.csv" na respectiva pasta. A correção é feita por coluna. Quando terminar todas as colunas, simplesmente clique em *Quit*. A transcrição da tabela estará pronta.
 
 
-
 ### Como instalar e rodar o transk table no seu computador:
 
 #### Requisitos
