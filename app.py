@@ -8,6 +8,8 @@ from tkinter.font import Font
 import pandas as pd
 import numpy as np
 import os
+from os.path import expanduser
+home = expanduser("~")
 
 
 def combine_funcs(*funcs):
@@ -21,27 +23,27 @@ def open_file():
     file = askopenfile(mode ='r') 
     if file is not None:
         page_number=user_page.get()
-        dfs = read_pdf(file.name, pages=int(page_number), pandas_options={'header':None})
-        folder='page_'+page_number
-        os.mkdir(folder)
+        dfs = read_pdf(file.name, pages=int(page_number), pandas_options={'header':None}, guess=False)
+        folder=home+'/page_'+page_number
+        os.makedirs(folder, exist_ok=True) #overwrite caso a pasta já exista
         path_file=folder+'/'+'page_{}.csv'.format(page_number)
         dfs[0].to_csv(path_file, index=False)
 
 def open_excel():
     page_number=user_page.get()
-    folder='page_'+page_number
+    folder=home+'/page_'+page_number
     path_file=folder+'/'+'page_{}.csv'.format(page_number)
     os.system("start EXCEL.EXE {}".format(path_file))
 
 def open_calc():
         page_number=user_page.get()
-        folder='page_'+page_number
+        folder=home+'/page_'+page_number
         path_file=folder+'/'+'page_{}.csv'.format(page_number)
         os.system("libreoffice {}".format(path_file))
 
 def open_modfile():
     page_number=user_page.get()
-    folder='page_'+page_number
+    folder=home+'/page_'+page_number
     path_file=folder+'/'+'page_{}.csv'.format(page_number)
     #create a copy from manually modified file
     new_name=path_file.replace('.csv','_final.csv')
@@ -62,7 +64,7 @@ def to_number(x):
 
 def transform_cols():    
     page_number=user_page.get()
-    folder='page_'+page_number
+    folder=home+'/page_'+page_number
     path_file=folder+'/'+'page_{}.csv'.format(page_number)
     #create a copy from manually modified file
     for col in df.iloc[:,1:].columns:
