@@ -22,13 +22,35 @@ def open_file():
     global path_file
     file = askopenfile(mode ='r') 
     if file is not None:
-        page_number=user_page.get()
-        # dfs = read_pdf(file.name, pages=int(page_number), pandas_options={'header':None}, guess=False) #se a planilha vir apenas com o header (sem os dados) substitua a linha de baixo por essa aqui
-        dfs = read_pdf(file.name, pages=int(page_number), pandas_options={'header':None})
-        folder=home+'/'+user_folder.get()+'/page_'+page_number
-        os.makedirs(folder, exist_ok=True) #overwrite caso a pasta já exista
-        path_file=folder+'/'+'page_{}.csv'.format(page_number)
-        dfs[0].to_csv(path_file, index=False)
+        try:
+            page_number=user_page.get()
+            dfs = read_pdf(file.name, pages=int(page_number), pandas_options={'header':None}, guess=False) #se a planilha vir apenas com o header (sem os dados) substitua a linha de baixo por essa aqui
+            # dfs = read_pdf(file.name, pages=int(page_number), pandas_options={'header':None})
+            folder=home+'/'+user_folder.get()+'/page_'+page_number
+            os.makedirs(folder, exist_ok=True) #overwrite caso a pasta já exista
+            path_file=folder+'/'+'page_{}.csv'.format(page_number)
+            dfs[0].to_csv(path_file, index=False)
+            message_open = tk.Tk()
+            message_open.geometry("500x100+650+450")
+            message_open.title('Message')
+            style = ThemedStyle(message_open)
+            style.set_theme("arc")
+            msg=tk.Frame(message_open)
+            msg.pack()
+            content=ttk.Label(msg, text="Done!", font=("Helvetica", "50"))
+            content.pack()
+        except:
+            message_open = tk.Tk()
+            message_open.geometry("500x100+650+450")
+            message_open.title('Message')
+            style = ThemedStyle(message_open)
+            style.set_theme("arc")
+            msg=tk.Frame(message_open)
+            msg.pack()
+            content=ttk.Label(msg, text="The tabulation fails. \nPlease, check the log file", font=("Helvetica", "16"))
+            content.pack()
+
+
 
 def open_excel():
     page_number=user_page.get()
@@ -77,6 +99,7 @@ def transform_cols():
 
 
 root = tk.Tk()
+root.geometry('+250+150')
 root.title('Transk Table 0.0.1')
 photo = tk.PhotoImage(file = "letter.png")
 root.iconphoto(False, photo)
@@ -95,6 +118,8 @@ root.option_add("*Font", default_font)
 
 #create myfont
 my_font=Font(family="Helvetica", size=12)
+my_font2=Font(family="Helvetica", size=50)
+
 
 
 #==================================================================
