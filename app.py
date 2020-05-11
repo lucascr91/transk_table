@@ -23,27 +23,28 @@ def open_file():
     file = askopenfile(mode ='r') 
     if file is not None:
         page_number=user_page.get()
-        dfs = read_pdf(file.name, pages=int(page_number), pandas_options={'header':None}, guess=False)
-        folder=home+'/page_'+page_number
+        # dfs = read_pdf(file.name, pages=int(page_number), pandas_options={'header':None}, guess=False) #se a planilha vir apenas com o header (sem os dados) substitua a linha de baixo por essa aqui
+        dfs = read_pdf(file.name, pages=int(page_number), pandas_options={'header':None})
+        folder=home+'/'+user_folder.get()+'/page_'+page_number
         os.makedirs(folder, exist_ok=True) #overwrite caso a pasta já exista
         path_file=folder+'/'+'page_{}.csv'.format(page_number)
         dfs[0].to_csv(path_file, index=False)
 
 def open_excel():
     page_number=user_page.get()
-    folder=home+'/page_'+page_number
+    folder=home+'/'+user_folder.get()+'/page_'+page_number
     path_file=folder+'/'+'page_{}.csv'.format(page_number)
     os.system("start EXCEL.EXE {}".format(path_file))
 
 def open_calc():
         page_number=user_page.get()
-        folder=home+'/page_'+page_number
+        folder=home+'/'+user_folder.get()+'/page_'+page_number
         path_file=folder+'/'+'page_{}.csv'.format(page_number)
         os.system("libreoffice {}".format(path_file))
 
 def open_modfile():
     page_number=user_page.get()
-    folder=home+'/page_'+page_number
+    folder=home+'/'+user_folder.get()+'/page_'+page_number
     path_file=folder+'/'+'page_{}.csv'.format(page_number)
     #create a copy from manually modified file
     new_name=path_file.replace('.csv','_final.csv')
@@ -64,7 +65,7 @@ def to_number(x):
 
 def transform_cols():    
     page_number=user_page.get()
-    folder=home+'/page_'+page_number
+    folder=home+'/'+user_folder.get()+'/page_'+page_number
     path_file=folder+'/'+'page_{}.csv'.format(page_number)
     #create a copy from manually modified file
     for col in df.iloc[:,1:].columns:
@@ -82,7 +83,10 @@ root.iconphoto(False, photo)
 style = ThemedStyle(root)
 style.set_theme("arc")
 
-user_page=tk.StringVar()
+#define as variáveis a serem inseridas pelo usuário
+user_page=tk.StringVar() 
+user_folder=tk.StringVar()
+
 
 #set default font
 default_font = tk.font.nametofont("TkDefaultFont")
@@ -117,25 +121,31 @@ first_step_entry=ttk.Entry(frame_one,width=15, textvariable=user_page)
 first_step_entry.grid(row=0, column=1)
 first_step_entry.focus()
 
+second_step=ttk.Label(frame_one, text="Type the working directory: ", background='white')
+second_step.grid(row=1, column=0)
+second_step_entry=ttk.Entry(frame_one,width=15, textvariable=user_folder)
+second_step_entry.grid(row=1, column=1)
+second_step_entry.focus()
+
 #READ
 read_btn = ttk.Button(frame_one, text ='Open', command = lambda:open_file()) 
-read_btn.grid(row=0,column=2)
+read_btn.grid(row=2, column=0, columnspan=2, sticky='EW')
 
 #OPEN EXCEL
 excel_btn = ttk.Button(frame_one, text ='Open Excel Sheet', command = lambda:open_excel()) 
-excel_btn.grid(row=1, column=0,)
+excel_btn.grid(row=3, column=0,)
 
 #OPEN CALC
 calc_btn = ttk.Button(frame_one, text ='Open Calc Sheet', command = lambda:open_calc()) 
-calc_btn.grid(row=1, column=1)
+calc_btn.grid(row=3, column=1)
 
 #CLEAN
 clean_btn = ttk.Button(frame_one, text ='Clean', command = combine_funcs(open_modfile, transform_cols)) 
-clean_btn.grid(row=2, column=0, columnspan=2, sticky='EW')
+clean_btn.grid(row=4, column=0, columnspan=2, sticky='EW')
 
 #QUIT
 clean_btn = ttk.Button(frame_one, text ='Quit', command = root.destroy) 
-clean_btn.grid(row=3, column=0, columnspan=2, sticky='EW')
+clean_btn.grid(row=5, column=0, columnspan=2, sticky='EW')
 
 #==================================================================
 #==================================================================
