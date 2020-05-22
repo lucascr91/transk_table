@@ -31,7 +31,7 @@ Na atual versão, o **transk table** tem apenas uma janela dividida em dois _fra
 
 ![alt text](https://github.com/lucascr91/transk_table/blob/master/gui_tt.png)
 
-O **transk table** transcreve uma tabela por vez. Para iniciar a transcrição o usuário deve definir o número da página do documento onde está a tabela de interesse e clicar em um dos botões de **método** para abrir o documento. Todos os botões têm a mesma finalidade, mas usam procedimentos diferentes. Idealmente, o usuário deve tentar o método 1, se falhar, tenta-se o método 2. Diante de nova falha, tenta-se o método 3.
+O **transk table** transcreve uma tabela por vez. Para iniciar a transcrição o usuário deve definir o número da página do documento onde está a tabela de interesse, definir o nome da pasta onde serão salvos os arquivos da transcrição e, por fim, clicar em um dos botões de **método** para abrir o documento. Todos os botões têm a mesma finalidade, mas usam procedimentos diferentes. Idealmente, o usuário deve tentar o método 1, se falhar, tenta-se o método 2. Diante de nova falha, tenta-se o método 3.
 
 Após a seleção do método, o **transk table** vai criar uma pasta no seu home directory cujo nome será dado pela string inserida no campo working directory. Dentro dessa pasta será criada uma subpasta e salvo um arquivo dentro da subpasta cujo nome é o número da página. O arquivo em csv é chamado "DDD_page.csv", onde DDD é o número da página. O arquivo "DDD_page.csv" é a transcrição bruta feita pelo tabular. Dessa forma, a simples definição da página e abertura documento encerra o passo 1.
 
