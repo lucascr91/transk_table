@@ -3,16 +3,25 @@ import numpy as np
 from colorama import Fore,Style
 pd.set_option('max_row',500)
 import sys
+from os.path import expanduser
+
+home = expanduser("~")
 
 try:
     sys.argv[1]
 except:
     raise  ValueError(Fore.RED+"Please inform the page"+Style.RESET_ALL)
 
+try:
+    sys.argv[2]
+except:
+    raise  ValueError(Fore.RED+"Please inform the folder"+Style.RESET_ALL)
+
 
 page =sys.argv[1]
+folder =sys.argv[2]
 
-file_name='page_{0}/page_{0}_final.csv'.format(page)
+file_name=home+'/'+folder+'/'+'page_{0}/page_{0}_final.csv'.format(page)
 
 df=pd.read_csv(file_name)
 

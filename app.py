@@ -9,8 +9,16 @@ import pandas as pd
 import numpy as np
 import os
 from os.path import expanduser
+from wand.image import Image as Img
+from PIL import Image
+import pytesseract
+from PyPDF2 import PdfFileWriter, PdfFileReader
+
 home = expanduser("~")
 
+if not sys.warnoptions:
+    import warnings
+    warnings.simplefilter("ignore")
 
 def combine_funcs(*funcs):
     def combined_func(*args, **kwargs):
@@ -18,18 +26,103 @@ def combine_funcs(*funcs):
             f(*args, **kwargs)
     return combined_func
 
-def open_file(): 
+def method_one(): 
     global path_file
     file = askopenfile(mode ='r') 
     if file is not None:
         try:
             page_number=user_page.get()
-            dfs = read_pdf(file.name, pages=int(page_number), pandas_options={'header':None}, guess=False) #se a planilha vir apenas com o header (sem os dados) substitua a linha de baixo por essa aqui
-            # dfs = read_pdf(file.name, pages=int(page_number), pandas_options={'header':None})
+            dfs = read_pdf(file.name, pages=int(page_number), pandas_options={'header':None})
             folder=home+'/'+user_folder.get()+'/page_'+page_number
             os.makedirs(folder, exist_ok=True) #overwrite caso a pasta já exista
             path_file=folder+'/'+'page_{}.csv'.format(page_number)
             dfs[0].to_csv(path_file, index=False)
+            message_open = tk.Tk()
+            message_open.geometry("500x100+650+450")
+            message_open.title('Message')
+            style = ThemedStyle(message_open)
+            style.set_theme("arc")
+            msg=tk.Frame(message_open)
+            msg.pack()
+            content=ttk.Label(msg, text="Done!", font=("Helvetica", "50"))
+            content.pack()
+        except:
+            message_open = tk.Tk()
+            message_open.geometry("500x100+650+450")
+            message_open.title('Message')
+            style = ThemedStyle(message_open)
+            style.set_theme("arc")
+            msg=tk.Frame(message_open)
+            msg.pack()
+            content=ttk.Label(msg, text="The tabulation fails. \nPlease, check the log file", font=("Helvetica", "16"))
+            content.pack()
+
+def method_two(): 
+    global path_file
+    file = askopenfile(mode ='r') 
+    if file is not None:
+        try:
+            page_number=user_page.get()
+            dfs = read_pdf(file.name, pages=int(page_number), pandas_options={'header':None}, guess=False)
+            folder=home+'/'+user_folder.get()+'/page_'+page_number
+            os.makedirs(folder, exist_ok=True) #overwrite caso a pasta já exista
+            path_file=folder+'/'+'page_{}.csv'.format(page_number)
+            dfs[0].to_csv(path_file, index=False)
+            message_open = tk.Tk()
+            message_open.geometry("500x100+650+450")
+            message_open.title('Message')
+            style = ThemedStyle(message_open)
+            style.set_theme("arc")
+            msg=tk.Frame(message_open)
+            msg.pack()
+            content=ttk.Label(msg, text="Done!", font=("Helvetica", "50"))
+            content.pack()
+        except:
+            message_open = tk.Tk()
+            message_open.geometry("500x100+650+450")
+            message_open.title('Message')
+            style = ThemedStyle(message_open)
+            style.set_theme("arc")
+            msg=tk.Frame(message_open)
+            msg.pack()
+            content=ttk.Label(msg, text="The tabulation fails. \nPlease, check the log file", font=("Helvetica", "16"))
+            content.pack()
+
+
+def method_three():
+    global path_file
+    file = askopenfile(mode ='r') 
+    if file is not None:
+        try:
+        #cria arquivos das páginas
+            document=file.name
+            page_number=user_page.get()
+            folder=home+'/'+user_folder.get()+'/page_'+page_number
+            os.makedirs(folder, exist_ok=True) #overwrite caso a pasta já exista
+            inputpdf = PdfFileReader(open(document, "rb"))
+            for i in range(1,inputpdf.numPages+1):
+                output = PdfFileWriter()
+                output.addPage(inputpdf.getPage(i-1))
+                pdf_file=folder+'/'+"document-page%s.pdf" % i
+                with open(pdf_file, "wb") as outputStream:
+                    output.write(outputStream)
+            #transforma página em imagem, lê como string e salva em csv
+            page_file=folder+'/'+"document-page%s.pdf" % page_number
+            with Img(filename=page_file, resolution=400) as img:
+                img.compression_quality = 99
+                img_file=page_file.replace('pdf','jpg')
+                img.save(filename=img_file)
+            im = Image.open(img_file)
+            text = pytesseract.image_to_string(im, lang = 'eng')
+            #salva csv file
+            text=text.replace(' ',',')
+            csv_file=folder+'/'+'page_{}.csv'.format(page_number)
+            h = open(csv_file,'w')
+            h.write(text)
+            h.close()
+            #drop pdf files
+            os.system('rm '+folder+'/*pdf')
+            os.system('rm '+folder+'/*jpg')
             message_open = tk.Tk()
             message_open.geometry("500x100+650+450")
             message_open.title('Message')
@@ -153,8 +246,14 @@ second_step_entry.grid(row=1, column=1)
 second_step_entry.focus()
 
 #READ
-read_btn = ttk.Button(frame_one, text ='Open', command = lambda:open_file()) 
-read_btn.grid(row=2, column=0, columnspan=2, sticky='EW')
+read_btn1 = ttk.Button(frame_one, text ='Method 1', command = lambda:method_one()) 
+read_btn1.grid(row=2, column=0, sticky='EW')
+
+read_btn2 = ttk.Button(frame_one, text ='Method 2', command = lambda:method_two()) 
+read_btn2.grid(row=2, column=1, sticky='EW')
+
+read_btn2 = ttk.Button(frame_one, text ='Method 3', command = lambda:method_three()) 
+read_btn2.grid(row=2, column=2, sticky='EW')
 
 #OPEN EXCEL
 excel_btn = ttk.Button(frame_one, text ='Open Excel Sheet', command = lambda:open_excel()) 
