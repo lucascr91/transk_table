@@ -31,18 +31,20 @@ Na atual versão, o **transk table** tem apenas uma janela dividida em dois _fra
 
 ![alt text](https://github.com/lucascr91/transk_table/blob/master/gui_tt.png)
 
-O **transk table** transcreve uma tabela por vez. Para iniciar a transcrição o usuário deve definir o número da página do documento onde está a tabela de interesse e clicar em *open* para abrir o documento. Após a seleção do documento, o **transk table** vai criar uma pasta no seu home directory cujo nome será dado pelo número da página. Dentro dessa pasta será salvo um arquivo em csv chamado "DDD_page.csv", onde DDD é o número da página. O arquivo "DDD_page.csv" é a transcrição bruta feita pelo tabular. Dessa forma, a simples definição da página e abertura documento encerra o passo 1.
+O **transk table** transcreve uma tabela por vez. Para iniciar a transcrição o usuário deve definir o número da página do documento onde está a tabela de interesse e clicar em um dos botões de **método** para abrir o documento. Todos os botões têm a mesma finalidade, mas usam procedimentos diferentes. Idealmente, o usuário deve tentar o método 1, se falhar, tenta-se o método 2. Diante de nova falha, tenta-se o método 3.
 
-Para a consecução do passo 2 o usuário precisa clicar em *Open Excel Sheet* (usuários de Windows) ou *Open Calc sheet* (usuários de Linux). O **transk table** abrirá então o "DDD_page.csv". Aberto esse arquivo, o usuário deve corrigir o número de linhas e colunas, salvar o arquivo e fechar. Após fechar o arquivo, o usuário deve clicar em *Clean*. Esse botão elimina todas as entradas diferentes de números, desconsiderando as informações da primeira coluna. 
+Após a seleção do método, o **transk table** vai criar uma pasta no seu home directory cujo nome será dado pela string inserida no campo working directory. Dentro dessa pasta será criada uma subpasta e salvo um arquivo dentro da subpasta cujo nome é o número da página. O arquivo em csv é chamado "DDD_page.csv", onde DDD é o número da página. O arquivo "DDD_page.csv" é a transcrição bruta feita pelo tabular. Dessa forma, a simples definição da página e abertura documento encerra o passo 1.
 
-Por fim, a última etapa consiste em digitar no terminal dentro da GUI o seguinte comando:
+Para a consecução do passo 2 o usuário precisa clicar em *Open Excel Sheet* (usuários de Windows) ou *Open Calc sheet* (usuários de Linux). O **transk table** abrirá então o "DDD_page.csv". Aberto esse arquivo, o usuário deve corrigir o número de linhas e colunas, salvar o arquivo e fechar. Após fechar o arquivo, o usuário deve clicar em *Clean*. Esse botão elimina todas as entradas diferentes de números, desconsiderando as informações da primeira coluna e do *header*. 
+
+Por fim, a última etapa (i.e., conferência) consiste em digitar no terminal dentro da GUI o seguinte comando:
 
 ```
-python corrections.py DDD
+python corrections.py DDD working directory
 ```
-Em que DDD é o número da página para a qual você quer fazer a conferência.
+Em que DDD é o número da página para a qual você quer fazer a conferência e working directory o nome da pasta que o usuário definiu no início
 
-Será então iniciado um "jogo" em que o computador irá lhe apresentar os valores de cada célula e você terá que responder se aquele valor é válido ou não. Se for válido apenas clique em enter. Se precisar substituir responda de acordo. O jogo é auto-explicativo e irá salvar automaticamente todas as alterações que você implementar durante as respostas em um arquivo chamado "DDD_page_final.csv" na respectiva pasta. A correção é feita por coluna. Quando terminar todas as colunas, simplesmente clique em *Quit*. A transcrição da tabela estará pronta.
+Será então iniciado um "jogo" em que o computador irá lhe apresentar os valores de cada célula e você terá que responder se aquele valor é válido ou não. Se for válido apenas clique enter. Se precisar substituir responda de acordo. O jogo é auto-explicativo e irá salvar automaticamente todas as alterações que você implementar durante as respostas em um arquivo chamado "DDD_page_final.csv" na respectiva pasta. A correção é feita por coluna. Quando terminar todas as colunas, simplesmente clique em *Quit*. A transcrição da tabela estará pronta.
 
 
 ### Como instalar e rodar o transk table no seu computador:
@@ -51,13 +53,7 @@ Será então iniciado um "jogo" em que o computador irá lhe apresentar os valor
 
 Para instalar e rodar o *transk table* no seu computador você irá precisar ter instalado o python 3, alguns pacotes dessa linguagem que serão detalhados mais adiante, além de acesso ao terminal. A forma mais conveniente de se instalar o python com os pacotes necessários para rodar o *transk table* é instalar o [Anaconda](https://www.anaconda.com/products/individual). A instalação é simples e pode ser feita após o download do instalador no site do _software_ .Para os usuários de Windows recomendo baixar alguma das versões anteriores do Anaconda (digamos, 3.5). Versões mais recentes do Anaconda têm apresentado incompatibilidades com o Windows.
 
-Depois de instalado o Anaconda, abra o terminal do seu computador e digite:
-
-```
-pip install tabula-py
-```
-
-Esse é o único pacote que não vem instalado no Anaconda. Caso você tenha instalado o python de outra forma certifique-se de que sua instalação possui os seguintes módulos: pandas, numpy, ttkthemes e tkinter.
+Depois de instalado o Anaconda, será preciso instalar mais alguns módulos extras. Veja o arquivo REQUIREMENTS.md para checar quais módulos são necessários e instale cada um deles.
 
 #### Iniciando o transk table
 
@@ -72,4 +68,4 @@ python app.py
 
 ### Melhorias futuras
 
-A versão atual do *transk table* é completamente funcional e você poderá fazer transcrições de tabelas em imagens de baixa resolução de forma organizada e semi-automática. No entanto, a atual versão têm o imenso inconveniente de não ter a imagem da  tabela que está sendo transcrita dentro de GUI. Essas e outras limitações serão corrigidas na segunda versão. Se você tem interesse em contribuir veja a pasta *second_version*. Esta pasta contém o código atual da segunda versão que está sendo desenvolvida, bem como um documento que lista possíveis melhorias a serem incorporadas.
+A versão atual do *transk table* é completamente funcional e você poderá fazer transcrições de tabelas em imagens de baixa resolução de forma organizada e semi-automática. No entanto, essa versão têm o imenso inconveniente de não ter a imagem da  tabela que está sendo transcrita dentro de GUI. Essas e outras limitações serão corrigidas na segunda versão. Se você tem interesse em contribuir veja a pasta *second_version*. Esta pasta contém o código atual da segunda versão que está sendo desenvolvida, bem como um documento que lista possíveis melhorias a serem incorporadas.

@@ -1,0 +1,10 @@
+tkinter
+ttkthemes
+tabula
+pandas
+numpy
+os
+wand
+PIL
+pytesseract
+PyPDF2
